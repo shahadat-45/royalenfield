@@ -20,7 +20,8 @@
     const targetPosition2 = getElementOffset(category[1]);
     const targetPosition3 = getElementOffset(category[2]);
     const targetPosition4 = OffsetFromBottom(category[2]);
-    const headdingPosition = getElementOffset(headding);    
+    const headdingPosition = getElementOffset(headding);
+    
 
     window.addEventListener('scroll', function() {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -30,7 +31,7 @@
         } else {
             navbar.classList.remove('position-absolute'); 
         }
-        if (scrollTop > (targetPosition + 200) && scrollTop < (targetPosition2 + 200 )) {
+        if (scrollTop > (targetPosition + 270) && scrollTop < (targetPosition2 + 200 )) {
             carousel.forEach((element , index) => {
                 if (index === 1) {
                     element.classList.add('position-static');
@@ -43,7 +44,7 @@
                 
             });            
         } 
-        else if (scrollTop > (targetPosition2 + 200) && scrollTop < (targetPosition3 + 200 )) {
+        else if (scrollTop > (targetPosition2 + 270) && scrollTop < (targetPosition3 + 200 )) {
             carousel.forEach((element , index) => {
                 if (index === 2) {
                     element.classList.add('position-static');
@@ -56,7 +57,7 @@
                 
             });            
         }
-        else if (scrollTop > (targetPosition3 + 200) && scrollTop < (targetPosition4 + 200) ) {
+        else if (scrollTop > (targetPosition3 + 270) && scrollTop < (targetPosition3 + 800 )) {
             carousel.forEach((element , index) => {
                 if (index === 3) {
                     element.classList.add('position-static');
@@ -85,3 +86,76 @@
 
         }
     });
+    // console.log(targetPosition);
+    // console.log(targetPosition2);
+    // console.log(targetPosition3);
+    // console.log(targetPosition4);
+    function toggleCatMobile() {    
+        if (window.innerWidth < 576) {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // console.log(scrollTop);
+        
+            if (scrollTop > headdingPosition) {
+                navbar.classList.add('position-absolute'); 
+            } else {
+                navbar.classList.remove('position-absolute'); 
+            }
+            if (scrollTop > 630 && scrollTop < 918) {
+                carousel.forEach((element , index) => {
+                    if (index === 1) {
+                        element.classList.add('position-static');
+                            indicators.forEach((item , i)=>{
+                                if (i === 1) { 
+                                    item.classList.add('active');
+                                }
+                            })                    
+                    }
+                    
+                });           
+            } 
+            else if (scrollTop > 920 && scrollTop < 1208) {
+                carousel.forEach((element , index) => {
+                    if (index === 2) {
+                        element.classList.add('position-static');
+                            indicators.forEach((item , i)=>{
+                                if (i === 2) { 
+                                    item.classList.add('active');
+                                }
+                            })                    
+                    }
+                    
+                });            
+            }
+            else if (scrollTop > 1209 && scrollTop < 1496) {
+                carousel.forEach((element , index) => {
+                    if (index === 3) {
+                        element.classList.add('position-static');
+                            indicators.forEach((item , i)=>{
+                                if (i === 3) { 
+                                    item.classList.add('active');
+                                }
+                            })                    
+                    }
+                    
+                });            
+            }    
+            else{
+                carousel.forEach((element , index) => {                
+                    if (element.classList.contains('position-static')) {
+                        element.classList.remove('position-static');
+                    }
+                    indicators.forEach((item , i)=>{
+                        if (item.classList.contains('active')) { 
+                            item.classList.remove('active');
+                        }
+                    }) 
+    
+                });
+    
+            }
+        }
+    }
+    
+    window.addEventListener('load', toggleCatMobile);
+    window.addEventListener('resize', toggleCatMobile);
+    window.addEventListener('scroll', toggleCatMobile );
